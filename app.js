@@ -79,6 +79,26 @@ for(let i = 0; i < groupButtons.length; i++) {
   });
 }
 
+const arrowUp = document.querySelector(".arrow-up");
+const height = document.querySelector("#height");
+const weight = document.querySelector("#weight");
+
+weight.addEventListener("input", () => {
+  let bmi = weight.value / ((height.value / 100) ** 2);
+  let percentage;
+  if(bmi > 13.5 && bmi < 18.5) {
+    percentage = 7 + (bmi - 13.5) * 16 / 5;
+  } else if(bmi > 25 && bmi < 30 || bmi >= 30 && bmi < 35 || bmi >= 35 && bmi < 40) {
+    percentage = 40 + (bmi - 24.5) * 16 / 5;
+  } else if (bmi >= 18.5 && bmi < 25 ) {
+    percentage = 23 + (bmi - 18.5) * 16 / 7;
+  }
+
+  if(percentage > 6 && percentage < 88) {
+    arrowUp.style.left = `${percentage}%`;
+  }
+})
+
 function showMenu(e, groupContent) {
   let div = document.createElement("div");
   div.classList.add("desc");
